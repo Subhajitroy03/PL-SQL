@@ -1,0 +1,33 @@
+SET VERIFY OFF
+SET SERVEROUTPUT ON
+
+CREATE OR REPLACE PROCEDURE fibonacci(n NUMBER) IS
+a NUMBER:=0;
+b NUMBER:=1;
+c NUMBER;
+i NUMBER;
+BEGIN
+	IF n=1 THEN
+		DBMS_OUTPUT.PUT_LINE(0);
+		RETURN;
+	ELSIF n=2 THEN
+		DBMS_OUTPUT.PUT_LINE(1);
+		RETURN;
+	ELSE 
+		for i in 1..n-2 LOOP
+			c:=a+b;
+			a:=b;
+			b:=c;
+		END LOOP;
+		DBMS_OUTPUT.PUT_LINE(c);
+	END IF;
+	
+END;
+/
+
+ACCEPT n NUMBER PROMPT 'Enter n: ';
+
+BEGIN
+	fibonacci(&n);
+END;
+/

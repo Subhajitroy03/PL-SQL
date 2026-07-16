@@ -1,0 +1,34 @@
+SET VERIFY OFF
+SET SERVEROUTPUT ON
+
+CREATE OR REPLACE FUNCTION fibonacci_func(n NUMBER) 
+RETURN NUMBER IS
+a NUMBER:=0;
+b NUMBER:=1;
+c NUMBER;
+i NUMBER;
+BEGIN
+	IF n=1 THEN
+		RETURN 0;
+	ELSIF n=2 THEN
+		RETURN 1;
+	ELSE 
+		for i in 1..n-2 LOOP
+			c:=a+b;
+			a:=b;
+			b:=c;
+		END LOOP;
+		RETURN C;
+	END IF;
+	
+END;
+/
+
+ACCEPT n NUMBER PROMPT 'Enter n: ';
+DECLARE
+result NUMBER;
+BEGIN
+	result:=fibonacci_func(&n);
+	DBMS_OUTPUT.PUT_LINE(result);
+END;
+/
